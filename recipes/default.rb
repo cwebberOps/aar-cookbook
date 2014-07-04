@@ -6,3 +6,12 @@
 #
 # 
 #
+[
+  'apache2',
+  'mysql-server',
+  'unzip'
+].each do |pkg|
+
+  package pkg
+
+end
