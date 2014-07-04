@@ -6,4 +6,16 @@ describe 'aar::default' do
     ChefSpec::Runner.new.converge(described_recipe)
   end
 
+  [
+    'apache2',
+    'mysql-server',
+    'unzip'
+  ].each do |pkg|
+
+    it "installs #{pkg}" do
+      expect(chef_run).to install_package(pkg)
+    end
+
+  end
+
 end
