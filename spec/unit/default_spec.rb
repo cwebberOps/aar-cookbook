@@ -47,4 +47,9 @@ describe 'aar::default' do
     expect(resource).to subscribe_to('template[/etc/apache2/sites-enabled/AAR-apache.conf]')
   end
 
+  it 'downloads the tarball' do
+    expect(chef_run).to extract_tar_extract('https://github.com/colincam/Awesome-Appliance-Repair/archive/master.tar.gz') \
+      .with_target_dir('/var/www/AAR')
+  end
+
 end
