@@ -34,4 +34,13 @@ describe 'aar::default' do
       .with_content(%r{Directory /var/www/AAR})
   end
 
+  it "starts apache" do
+    expect(chef_run).to start_service('apache2')
+  end
+
+  it "enables apache" do
+    expect(chef_run).to enable_service('apache2')
+  end
+
+
 end
