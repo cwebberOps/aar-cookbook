@@ -9,9 +9,14 @@
 [
   'apache2',
   'mysql-server',
-  'unzip'
+  'unzip',
+  'libapache2-mod-wsgi',
+  'python-pip',
+  'python-mysqldb'
 ].each do |pkg|
 
   package pkg
 
 end
+
+python_pip 'flask'
