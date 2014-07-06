@@ -42,5 +42,9 @@ describe 'aar::default' do
     expect(chef_run).to enable_service('apache2')
   end
 
+  it "subscribes to AAR-apache.conf" do
+    resource = chef_run.service('apache2')
+    expect(resource).to subscribe_to('template[/etc/apache2/sites-enabled/AAR-apache.conf]')
+  end
 
 end
