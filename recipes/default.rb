@@ -20,3 +20,9 @@
 end
 
 python_pip 'flask'
+
+template '/etc/apache2/sites-enabled/AAR-apache.conf' do
+  source 'AAR-apache.conf.erb'
+end
+
+
