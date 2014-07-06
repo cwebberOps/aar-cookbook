@@ -25,6 +25,10 @@ describe 'aar::default' do
     expect(chef_run).to install_python_pip('flask')
   end
 
+  it "creates /etc/apache2/sites-enabled/AAR-apache.conf" do
+    expect(chef_run).to create_template('/etc/apache2/sites-enabled/AAR-apache.conf') 
+  end
+
   it "configures apache" do
     expect(chef_run).to render_file('/etc/apache2/sites-enabled/AAR-apache.conf') \
       .with_content(%r{Directory /var/www/AAR})
