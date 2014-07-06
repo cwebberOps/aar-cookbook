@@ -25,4 +25,8 @@ template '/etc/apache2/sites-enabled/AAR-apache.conf' do
   source 'AAR-apache.conf.erb'
 end
 
-
+service 'apache2' do
+  supports :restart => true, :reload => true
+  action [:start, :enable]
+  subscribes :reload, "template[/etc/apache2/sites-enabled/AAR-apache.conf]", :delayed
+end
