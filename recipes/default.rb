@@ -29,6 +29,10 @@ directory '/var/www/Awesome-Appliance-Repair-master' do
   recursive true
 end
 
+link '/var/www/AAR' do
+  to '/var/www/Awesome-Appliance-Repair-master'
+end
+
 python_pip 'flask'
 
 template '/etc/apache2/sites-enabled/AAR-apache.conf' do
