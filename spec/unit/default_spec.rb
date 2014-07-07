@@ -58,4 +58,9 @@ describe 'aar::default' do
       .with_user('www-data')
   end
 
+  it 'creates a symlink for cheating' do
+    expect(chef_run).to create_link('/var/www/AAR') \
+      .with_to('/var/www/Awesome-Appliance-Repair-master')
+  end
+
 end
