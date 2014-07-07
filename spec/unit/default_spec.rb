@@ -3,7 +3,10 @@ require 'spec_helper'
 describe 'aar::default' do
 
   let(:chef_run) do
-    ChefSpec::Runner.new.converge(described_recipe)
+    ChefSpec::Runner.new do |node|
+      node.set['aar']['db_password'] = 'dbpass'
+      node.set['aar']['secret_key'] = 'an_key'
+    end.converge(described_recipe)
   end
 
   [
@@ -61,6 +64,20 @@ describe 'aar::default' do
   it 'creates a symlink for cheating' do
     expect(chef_run).to create_link('/var/www/AAR') \
       .with_to('/var/www/Awesome-Appliance-Repair-master')
+  end
+
+  it 'creates AAR_config.py' do
+    expect(chef_run).to create_template('/var/www/AAR/AAR_config.py')
+  end
+
+  it 'sets the database app user password' do
+    expect(chef_run).to render_file('/var/www/AAR/AAR_config.py') \
+      .with_content(%r{"passwd":"dbpass"})
+  end
+
+  it 'sets the secret key' do
+    expect(chef_run).to render_file('/var/www/AAR/AAR_config.py') \
+      .with_content(%r{SECRET_KEY = "an_key"})
   end
 
 end
