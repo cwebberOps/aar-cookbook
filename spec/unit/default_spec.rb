@@ -52,4 +52,10 @@ describe 'aar::default' do
       .with_target_dir('/var/www/')
   end
 
+  it 'chowns the app directory' do
+    expect(chef_run).to create_directory('/var/www/Awesome-Appliance-Repair-master') \
+      .with_group('www-data') \
+      .with_user('www-data')
+  end
+
 end
