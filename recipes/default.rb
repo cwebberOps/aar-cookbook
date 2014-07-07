@@ -23,6 +23,12 @@ tar_extract 'https://github.com/colincam/Awesome-Appliance-Repair/archive/master
   target_dir '/var/www/'
 end
 
+directory '/var/www/Awesome-Appliance-Repair-master' do
+  group 'www-data'
+  owner 'www-data'
+  recursive true
+end
+
 python_pip 'flask'
 
 template '/etc/apache2/sites-enabled/AAR-apache.conf' do
