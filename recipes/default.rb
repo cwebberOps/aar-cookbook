@@ -33,6 +33,10 @@ link '/var/www/AAR' do
   to '/var/www/Awesome-Appliance-Repair-master'
 end
 
+template '/var/www/AAR/AAR_config.py' do
+  source 'AAR_config.py.erb'
+end
+
 python_pip 'flask'
 
 template '/etc/apache2/sites-enabled/AAR-apache.conf' do
