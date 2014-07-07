@@ -49,7 +49,7 @@ describe 'aar::default' do
 
   it 'downloads the tarball' do
     expect(chef_run).to extract_tar_extract('https://github.com/colincam/Awesome-Appliance-Repair/archive/master.tar.gz') \
-      .with_target_dir('/var/www/AAR')
+      .with_target_dir('/var/www/')
   end
 
 end

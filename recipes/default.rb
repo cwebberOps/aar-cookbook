@@ -19,6 +19,10 @@
 
 end
 
+tar_extract 'https://github.com/colincam/Awesome-Appliance-Repair/archive/master.tar.gz' do
+  target_dir '/var/www/'
+end
+
 python_pip 'flask'
 
 template '/etc/apache2/sites-enabled/AAR-apache.conf' do
