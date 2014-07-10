@@ -48,3 +48,14 @@ service 'apache2' do
   action [:start, :enable]
   subscribes :reload, "template[/etc/apache2/sites-enabled/AAR-apache.conf]", :delayed
 end
+
+execute 'mysql[prep]' do
+  command 'mysql < /var/www/AAR/make_AARdb.sql'
+  not_if "mysql -e 'show databases;' | grep AARdb"
+end
+
+execute 'mysql[user]' do
+  command "mysql -e \"CREATE USER 'aarapp'@'localhost' IDENTIFIED BY '#{node['aar']['db_password']}'\""
+  not_if 'mysql -e "SELECT user FROM mysql.user" | grep aarapp'
+end
+

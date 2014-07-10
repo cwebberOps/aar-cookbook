@@ -9,6 +9,10 @@ describe 'aar::default' do
     end.converge(described_recipe)
   end
 
+  before do
+    stub_command("mysql -e 'show databases;' | grep AARdb").and_return(true)
+  end
+
   [
     'apache2',
     'mysql-server',
@@ -79,5 +83,3 @@ describe 'aar::default' do
     expect(chef_run).to render_file('/var/www/AAR/AAR_config.py') \
       .with_content(%r{SECRET_KEY = "an_key"})
   end
-
-end
